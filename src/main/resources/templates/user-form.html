@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="et" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle}">Kasutaja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<main class="container py-5">
+    <div class="mx-auto" style="max-width: 640px">
+        <h1 class="h2 mb-4" th:text="${pageTitle}">Kasutaja</h1>
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <form method="post" th:action="@{/users/save}" th:object="${user}">
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="firstName">Eesnimi</label>
+                        <input class="form-control" id="firstName" type="text" th:field="*{firstName}"
+                               th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}"
+                             th:errors="*{firstName}"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="lastName">Perekonnanimi</label>
+                        <input class="form-control" id="lastName" type="text" th:field="*{lastName}"
+                               th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}"
+                             th:errors="*{lastName}"></div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="email">E-posti aadress</label>
+                        <input class="form-control" id="email" type="email" th:field="*{email}"
+                               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
+                             th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary" type="submit">Salvesta</button>
+                        <a class="btn btn-outline-secondary" th:href="@{/}">Tagasi</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
